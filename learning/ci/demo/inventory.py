@@ -40,6 +40,12 @@ def validate_inventory(servers):
 
 
 def main():
+    """Validate the inventory file named on the command line.
+
+    Return 0 if the inventory is valid, or 1 if the file cannot be read
+    or the inventory has validation errors.
+    """
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("inventory", type=Path, help="path to a JSON inventory")
     args = parser.parse_args()
