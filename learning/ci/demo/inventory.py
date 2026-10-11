@@ -21,7 +21,7 @@ def validate_inventory(servers):
         if "name" not in server:
             errors.append(f"server {index}: missing 'name' field")
         elif not isinstance(server["name"], str):
-            errors.append(f"server {index}: 'name' must be a string") 
+            errors.append(f"server {index}: 'name' must be a string")
         elif server["name"].strip() == "":
             errors.append(f"server {index}: 'name' cannot be empty or whitespace-only")
 
@@ -35,7 +35,7 @@ def validate_inventory(servers):
                 ipaddress.ip_address(server["ip"])
             except ValueError:
                 errors.append(f"server {index}: 'ip' is not a valid IP address")
-                
+
     return errors
 
 
