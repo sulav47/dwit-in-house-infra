@@ -11,6 +11,9 @@ def validate_inventory(servers):
     if not isinstance(servers, list):
         return ["inventory must be a JSON list"]
 
+    if len(servers) == 0:
+        return ["inventory cannot be empty"]
+
     errors = []
     for index, server in enumerate(servers, start=1):
         if not isinstance(server, dict):

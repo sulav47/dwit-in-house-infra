@@ -1,3 +1,5 @@
+import subprocess
+import sys
 import unittest
 
 from inventory import validate_inventory
@@ -43,3 +45,17 @@ class TestInventory(unittest.TestCase):
     def test_invalid_ip_is_rejected(self):
         result = validate_inventory([{"name": "server1", "ip": "999.999.999.999"}])
         self.assertTrue(result)
+
+    def test_empty_inventory_is_rejected(self):
+        result = validate_inventory([])
+        self.assertTrue(result)
+
+    def test_cli_rejects_invalid_inventory(self):
+        result = subprocess.run(
+            [sys.executable, "inventory.py", "examples/invalid.json"],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cannot be empty", result.stdout)
