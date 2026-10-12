@@ -31,3 +31,15 @@ class TestInventory(unittest.TestCase):
     def test_non_object_in_list_is_rejected(self):
         result = validate_inventory(["server1"])
         self.assertTrue(result)
+
+    def test_missing_ip_is_rejected(self):
+        result = validate_inventory([{"name": "server1"}])
+        self.assertTrue(result)
+
+    def test_nonstring_ip_is_rejected(self):
+        result = validate_inventory([{"name": "server1", "ip": 123}])
+        self.assertTrue(result)
+
+    def test_invalid_ip_is_rejected(self):
+        result = validate_inventory([{"name": "server1", "ip": "999.999.999.999"}])
+        self.assertTrue(result)
