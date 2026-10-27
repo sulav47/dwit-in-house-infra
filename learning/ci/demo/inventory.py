@@ -21,12 +21,12 @@ def validate_inventory(servers):
             continue
 
         # Name: must exist, be a string, and contain non-whitespace characters.
-        # if "name" not in server:
-        #     errors.append(f"server {index}: missing 'name' field")
-        # elif not isinstance(server["name"], str):
-        #     errors.append(f"server {index}: 'name' must be a string")
-        # elif server["name"].strip() == "":
-        #     errors.append(f"server {index}: 'name' cannot be empty or whitespace-only")
+        if "name" not in server:
+            errors.append(f"server {index}: missing 'name' field")
+        elif not isinstance(server["name"], str):
+            errors.append(f"server {index}: 'name' must be a string")
+        elif server["name"].strip() == "":
+            errors.append(f"server {index}: 'name' cannot be empty or whitespace-only")
 
         # IP: must exist, be a string, and be a valid IPv4 or IPv6 address.
         if "ip" not in server:
